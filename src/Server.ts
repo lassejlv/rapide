@@ -6,13 +6,11 @@ export class Server {
   port: number;
   routes: Route[];
   use?: Plugins;
-  whenReady?: Promise<void>;
 
   constructor({ port, use }: { port: number; use?: Plugins }) {
     this.port = port;
     this.routes = [];
     this.use = use;
-    this.whenReady;
   }
 
   get(path: string, handler: Handler) {
@@ -48,8 +46,6 @@ export class Server {
         const originalResponse = await router.run({
           notFound: this.use?.notFound || (() => new Response("Not Found", { status: 404 })),
         });
-
-        this.whenReady = Promise.resolve();
 
         if (this.use?.logger) {
           const pathname = new URL(req.url).pathname;
