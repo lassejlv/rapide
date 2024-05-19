@@ -1,15 +1,25 @@
-# bun-router
+# Rapide
 
-To install dependencies:
+"Rapide" is the french word for "fast". This is a simple, fast, and easy-to-use web server framework for Bun.js.
 
-```bash
-bun install
+## Example Usage
+
+```typescript
+import { Server } from "./Server";
+
+const server = new Server({
+  port: 5173,
+  use: {
+    logger: true,
+  },
+});
+
+server.get("/", async (c) => {
+  const name = c.query.get("name");
+  if (!name) return c.json({ message: "Missing name query parameter" }, 400);
+
+  return c.json({ message: `Hello, ${name}!` });
+});
+
+server.start();
 ```
-
-To run:
-
-```bash
-bun run src/index.ts
-```
-
-This project was created using `bun init` in bun v1.1.8. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
