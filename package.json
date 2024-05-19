@@ -1,0 +1,15 @@
+{
+  "name": "bun-router",
+  "module": "src/index.ts",
+  "type": "module",
+  "main": "dist/Server.js",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
+}

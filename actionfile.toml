@@ -1,0 +1,4 @@
+
+[dev]
+cmd = "bun --watch src/index.ts"
+silent = true
