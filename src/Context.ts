@@ -1,3 +1,5 @@
+import * as path from "path/posix";
+
 function Context(request: Request) {
   const json = async (json: object, status: number = 200) => {
     return new Response(JSON.stringify(json), {
@@ -17,6 +19,30 @@ function Context(request: Request) {
     });
   };
 
+  const redirect = async (url: string, status: number = 302) => {
+    return new Response(null, {
+      status,
+      headers: {
+        Location: url,
+      },
+    });
+  };
+
+  const sendFile = async (filePath: string, status: number = 200) => {
+    const file = Bun.file(filePath);
+    let rawFileName = path.basename(filePath);
+    rawFileName = rawFileName.replace(/ /g, "_");
+    rawFileName = rawFileName.replace(/\\/g, "_");
+    rawFileName = rawFileName.split("_")[rawFileName.split("_").length - 1];
+    return new Response(file, {
+      headers: {
+        "Content-Type": "application/octet-stream",
+        "Content-Disposition": `attachment; filename="${rawFileName}"`,
+      },
+      status,
+    });
+  };
+
   const param = {
     get: (key: string) => {
       return new URL(request.url).searchParams.get(key);
@@ -32,6 +58,8 @@ function Context(request: Request) {
   return {
     json,
     text,
+    redirect,
+    sendFile,
     param,
     query,
     req: request,
