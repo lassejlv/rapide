@@ -19,6 +19,15 @@ function Context(request: Request) {
     });
   };
 
+  const html = async (html: string, status: number = 200) => {
+    return new Response(html, {
+      status,
+      headers: {
+        "Content-Type": "text/html",
+      },
+    });
+  };
+
   const error = async (message: string, status: number = 500) => {
     return json({ error: message }, status);
   };
@@ -57,13 +66,21 @@ function Context(request: Request) {
     },
   };
 
+  const readHtml = async (filePath: string) => {
+    if (!filePath.endsWith(".html")) throw new Error("File must be an HTML file");
+    const file = await Bun.file(filePath).text();
+    return file;
+  };
+
   return {
     json,
     text,
+    html,
     error,
     success,
     redirect,
     sendFile,
+    readHtml,
     params: {},
     query,
     req: request,

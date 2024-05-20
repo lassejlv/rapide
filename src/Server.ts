@@ -64,7 +64,11 @@ export class Server {
         if (this.use?.cors?.origin) {
           originalResponse.headers.set("Access-Control-Allow-Origin", this.use.cors.origin);
           originalResponse.headers.set("Access-Control-Allow-Methods", this.use.cors.methods.join(","));
+          originalResponse.headers.set("X-Powered-By", "Rapide");
         }
+
+        // Add custom header
+        originalResponse.headers.set("X-Powered-By", "Rapide");
 
         return originalResponse;
       },
