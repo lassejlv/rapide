@@ -5,7 +5,7 @@
 ## Example Usage
 
 ```typescript
-import { Server } from "./Server";
+import { Server } from "rapidee";
 
 const server = new Server({
   use: {
