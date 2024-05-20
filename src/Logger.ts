@@ -1,6 +1,6 @@
 import Chalk from "chalk";
 
-export async function Logger(path: string, method: string, status: number = 200) {
+export async function Logger(path: string, method: string, status: number = 200, start: number) {
   const statusCode = (status: number) => {
     if (status >= 200 && status < 300) {
       return Chalk.green(status);
@@ -16,5 +16,7 @@ export async function Logger(path: string, method: string, status: number = 200)
     }
   };
 
-  console.log(`${Chalk.bold(method)} ${path} - ${statusCode(status)}`);
+  const totalTime = Date.now() - start;
+
+  console.log(`${Chalk.bold(method)} ${path} - ${statusCode(status)} - ${totalTime}ms`);
 }

@@ -44,6 +44,7 @@ export class Server {
     Bun.serve({
       port: port,
       fetch: async (req: Request) => {
+        const start = Date.now();
         const router = await Router(req);
 
         for (const route of this.routes) {
@@ -57,7 +58,7 @@ export class Server {
         if (this.use?.logger) {
           const pathname = new URL(req.url).pathname;
           const statusCode = originalResponse.status;
-          Logger(pathname, req.method, statusCode);
+          Logger(pathname, req.method, statusCode, start);
         }
 
         if (this.use?.cors?.origin) {

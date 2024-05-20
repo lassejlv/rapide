@@ -17,7 +17,7 @@ async function Router(req: Request) {
         const c = Context(req);
 
         // @ts-ignore
-        return handler(c, req);
+        return handler(c);
       }
     }
 

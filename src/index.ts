@@ -1,11 +1,18 @@
-import { Server } from "rapidee";
+import { Server } from "./Server";
 
-const app = new Server({ use: { logger: false } });
+const app = new Server({ use: { logger: true } });
 
 const PORT = Number(process.env.PORT) || 5173;
 
-app.get("/", async (c) => {
-  return c.json({ message: "Hello, World!" });
+app.post("/", async (c) => {
+  try {
+    const body = await c.req.json();
+    console.log(body);
+
+    return c.json({ body });
+  } catch (error) {
+    return c.json({ error: error.message }, 500);
+  }
 });
 
 app.listen(PORT).then(() => {

@@ -1,6 +1,6 @@
 {
   "name": "rapidee",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a simple, fast, and easy-to-use web server framework for Bun.js",
   "module": "src/index.ts",
   "type": "module",
@@ -8,6 +8,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "express": "^4.19.2",
+    "hono": "^4.3.8",
     "rapidee": "^0.1.1"
   },
   "peerDependencies": {
