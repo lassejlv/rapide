@@ -1,14 +1,13 @@
+import chalk from "chalk";
 import { Logger } from "./Logger";
 import Router from "./Router";
 import type { Handler, Route, Plugins, NotFound, Events } from "./types";
 
 export class Server {
-  port: number;
   routes: Route[];
   use?: Plugins;
 
-  constructor({ port, use }: { port: number; use?: Plugins }) {
-    this.port = port;
+  constructor({ use }: { use?: Plugins }) {
     this.routes = [];
     this.use = use;
   }
@@ -33,9 +32,17 @@ export class Server {
     this.use = { ...this.use, notFound: handler };
   }
 
-  async start() {
+  async listen(port: number) {
+    if (this.use?.cors) {
+      console.log(chalk.green.bold("CORS enabled"));
+    }
+
+    if (this.use?.logger) {
+      console.log(chalk.green.bold("Logger enabled"));
+    }
+
     Bun.serve({
-      port: this.port,
+      port: port,
       fetch: async (req: Request) => {
         const router = await Router(req);
 
@@ -51,6 +58,11 @@ export class Server {
           const pathname = new URL(req.url).pathname;
           const statusCode = originalResponse.status;
           Logger(pathname, req.method, statusCode);
+        }
+
+        if (this.use?.cors?.origin) {
+          originalResponse.headers.set("Access-Control-Allow-Origin", this.use.cors.origin);
+          originalResponse.headers.set("Access-Control-Allow-Methods", this.use.cors.methods.join(","));
         }
 
         return originalResponse;

@@ -24,15 +24,18 @@ server.get("/", async (c) => {
 server.start();
 ```
 
+## You know Express.js?
+
+Rapide's syntax is 90% similar to Express.js, so if you have experience with Express.js, you will feel right at home. Rapide is just faster!
+
 ## Type-Safe
 
 Everything is type-safe 😎
 
 https://github.com/lassejlv/rapide/assets/77295879/da4486f0-d218-4a2d-bf38-11c394462cd8
 
-## Helpers functions
+## Helper functions
 
 Easy return something back using build in helper functions
 
 https://github.com/lassejlv/rapide/assets/77295879/82d148e6-0983-478d-891d-57a56851af78
-
