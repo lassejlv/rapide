@@ -1,6 +1,6 @@
 {
   "name": "rapidee",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "a simple, fast, and easy-to-use web server framework for Bun.js",
   "module": "src/index.ts",
   "type": "module",

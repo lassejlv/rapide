@@ -43,12 +43,6 @@ function Context(request: Request) {
     });
   };
 
-  const param = {
-    get: (key: string) => {
-      return new URL(request.url).searchParams.get(key);
-    },
-  };
-
   const query = {
     get: (key: string) => {
       return new URL(request.url).searchParams.get(key);
@@ -60,7 +54,7 @@ function Context(request: Request) {
     text,
     redirect,
     sendFile,
-    param,
+    params: {},
     query,
     req: request,
   };

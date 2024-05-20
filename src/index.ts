@@ -4,15 +4,14 @@ const app = new Server({ use: { logger: true } });
 
 const PORT = Number(process.env.PORT) || 5173;
 
-app.post("/", async (c) => {
-  try {
-    const body = await c.req.json();
-    console.log(body);
+app.get("/", (c) => {
+  return c.json({ message: "Hello, World!" });
+});
 
-    return c.json({ body });
-  } catch (error) {
-    return c.json({ error: error.message }, 500);
-  }
+app.get("/user/:id/settings/:chatId", (c) => {
+  console.log(c.params);
+
+  return c.json(c.params);
 });
 
 app.listen(PORT).then(() => {
