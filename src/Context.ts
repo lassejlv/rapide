@@ -19,6 +19,14 @@ function Context(request: Request) {
     });
   };
 
+  const error = async (message: string, status: number = 500) => {
+    return json({ error: message }, status);
+  };
+
+  const success = async (message: string, status: number = 200) => {
+    return json({ message }, status);
+  };
+
   const redirect = async (url: string, status: number = 302) => {
     return new Response(null, {
       status,
@@ -52,6 +60,8 @@ function Context(request: Request) {
   return {
     json,
     text,
+    error,
+    success,
     redirect,
     sendFile,
     params: {},

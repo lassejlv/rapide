@@ -2,6 +2,8 @@ type Handler = (
   c: {
     json: (json: object, status?: number) => Promise<Response>;
     text: (text: string, status?: number) => Promise<Response>;
+    error: (message: string, status?: number) => Promise<Response>;
+    success: (message: string, status?: number) => Promise<Response>;
     redirect: (url: string, status?: number) => Promise<Response>;
     sendFile: (filePath: string, status?: number) => Promise<Response>;
     params: Record<string, string>;
