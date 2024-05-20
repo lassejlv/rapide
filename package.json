@@ -1,10 +1,14 @@
 {
-  "name": "bun-router",
+  "name": "rapidee",
+  "version": "0.1.1",
+  "description": "a simple, fast, and easy-to-use web server framework for Bun.js",
   "module": "src/index.ts",
   "type": "module",
   "main": "dist/Server.js",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "express": "^4.19.2",
+    "rapidee": "^0.1.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

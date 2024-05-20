@@ -26,6 +26,21 @@ server.listen(5173).then(() => {
 
 Rapide's syntax is 90% similar to Express.js, so if you have experience with Express.js, you will feel right at home. Rapide is just faster!
 
+## Performance Comparison with Express.js
+
+| Metric              | Rapide (Port 5173) | Express Server (Port 5174) |
+| ------------------- | ------------------ | -------------------------- |
+| Total Requests      | 1,336,000          | 688,000                    |
+| Test Duration       | 10.02 seconds      | 11.02 seconds              |
+| Requests per Second | 133,132            | 62,434                     |
+| Average Latency     | 0.09 ms            | 1.13 ms                    |
+| Max Latency         | 13 ms              | 42 ms                      |
+| Average Throughput  | 18 MB/sec          | 13.5 MB/sec                |
+
+### Conclusion
+
+Rapide is approximately **2.13 times faster** than the Express server in handling requests.
+
 ## Type-Safe
 
 Everything is type-safe 😎
