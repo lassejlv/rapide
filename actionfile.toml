@@ -2,3 +2,6 @@
 [dev]
 cmd = "bun --watch src/index.ts"
 silent = true
+
+[build]
+cmd = "bun src/build.ts"

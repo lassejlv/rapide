@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { Logger } from "./Logger";
 import Router from "./Router";
-import type { Handler, Route, Plugins, NotFound, Events } from "./types";
+import type { Handler, Route, Plugins, NotFound } from "./types";
 
 export class Server {
   routes: Route[];

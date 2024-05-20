@@ -20,6 +20,5 @@ type Routes = { method: Methods; path: string; handler: Handler };
 type Route = { method: Methods; path: string; handler: Handler };
 type Plugins = { logger?: boolean; cors?: CorsOptions; notFound?: NotFound; pretterJson?: boolean };
 type CorsOptions = { origin: string; methods: Methods[] };
-type Events = "READY";
 
-export type { Handler, NotFound, Methods, Routes, Route, Plugins, CorsOptions, Events };
+export type { Handler, NotFound, Methods, Routes, Route, Plugins, CorsOptions };
