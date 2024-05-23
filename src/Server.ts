@@ -2,6 +2,9 @@ import chalk from "chalk";
 import { Logger } from "./Logger";
 import Router from "./Router";
 import type { Handler, Route, Plugins, NotFound } from "./types";
+import { version } from "../package.json";
+
+const start = Date.now();
 
 export class Server {
   routes: Route[];
@@ -24,8 +27,16 @@ export class Server {
     this.routes.push({ method: "PUT", path, handler });
   }
 
+  patch(path: string, handler: Handler) {
+    this.routes.push({ method: "PATCH", path, handler });
+  }
+
   delete(path: string, handler: Handler) {
     this.routes.push({ method: "DELETE", path, handler });
+  }
+
+  options(path: string, handler: Handler) {
+    this.routes.push({ method: "OPTIONS", path, handler });
   }
 
   notFound(handler: NotFound) {
@@ -33,12 +44,9 @@ export class Server {
   }
 
   async listen(port: number) {
-    if (this.use?.cors) {
-      console.log(chalk.green.bold("CORS enabled"));
-    }
-
-    if (this.use?.logger) {
-      console.log(chalk.green.bold("Logger enabled"));
+    if (this.use?.logger && !this.use.removeSystemLogs) {
+      console.log(chalk.bold(`Using Rapide v${version}`));
+      console.log(chalk.bold.blue(`Enabled plugins: ${chalk.hex("#18191a")(Object.keys(this.use).join(", "))}`));
     }
 
     Bun.serve({

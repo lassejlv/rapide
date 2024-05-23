@@ -1,13 +1,11 @@
 import { Server } from "./Server";
 
-const app = new Server({ use: { logger: true, cors: { origin: "*", methods: ["POST"] } } });
+const app = new Server({ use: { logger: true } });
 
 const PORT = Number(process.env.PORT) || 5173;
 
-app.get("/", async (c) => {
-  const html = await c.readHtml("test.html");
-
-  return c.html(html);
+app.options("/", (c) => {
+  return c.html("<h1>Hello, World!</h1>");
 });
 
 app.listen(PORT).then(() => {

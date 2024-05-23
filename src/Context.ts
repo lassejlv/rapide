@@ -10,6 +10,15 @@ function Context(request: Request) {
     });
   };
 
+  const pretty = async (json: object, status: number = 200) => {
+    return new Response(JSON.stringify(json, null, 2), {
+      status,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   const text = async (text: string, status: number = 200) => {
     return new Response(text, {
       status,
@@ -74,6 +83,7 @@ function Context(request: Request) {
 
   return {
     json,
+    pretty,
     text,
     html,
     error,
